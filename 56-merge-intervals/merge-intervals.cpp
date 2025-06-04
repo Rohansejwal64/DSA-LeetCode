@@ -12,6 +12,7 @@ public:
             for(int j=i+1;j<intervals.size();j++){
                 if(intervals[j][0]<=end){
                     end=max(end,intervals[j][1]);
+                    i=j;
                 }
                 else{
                     break;
