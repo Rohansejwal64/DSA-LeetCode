@@ -9,7 +9,7 @@ public:
             int rem=target-a;
             if(mp.find(rem)!=mp.end()){
                 ans.push_back(i);
-                ans.push_back(mp.find(rem)->second);
+                ans.push_back(mp[rem]);
                 break;
 
             }
