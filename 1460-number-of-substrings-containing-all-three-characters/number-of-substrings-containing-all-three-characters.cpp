@@ -1,24 +1,21 @@
 class Solution {
 public:
-    int numberOfSubstrings(string s) {
-        int n = s.size();
+   int numberOfSubstrings(string s) {
+    int n = s.size();
     int cnt = 0;
-    int l = 0, r = 0;
-    unordered_map<char, int> mpp;
+    int l = 0;
+    int freq[3] = {0, 0, 0};  // for 'a', 'b', 'c'
 
-    for (r = 0; r < n; r++) {
-        mpp[s[r]]++;
-        
-        while (mpp.size() == 3) {
-            cnt += (n - r);  // All substrings starting at l and ending at r or further
-            mpp[s[l]]--;
-            if (mpp[s[l]] == 0) {
-                mpp.erase(s[l]);
-            }
+    for (int r = 0; r < n; r++) {
+        freq[s[r] - 'a']++;
+
+        while (freq[0] > 0 && freq[1] > 0 && freq[2] > 0) {
+            cnt += (n - r);
+            freq[s[l] - 'a']--;
             l++;
         }
     }
     return cnt;
-        
-    }
+}
+
 };
