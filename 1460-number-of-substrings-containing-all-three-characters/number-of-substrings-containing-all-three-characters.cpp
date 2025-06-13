@@ -1,21 +1,18 @@
 class Solution {
 public:
-   int numberOfSubstrings(string s) {
+  int numberOfSubstrings(string s) {
     int n = s.size();
+    int last[3] = {-1, -1, -1};  // last seen positions for a, b, c
     int cnt = 0;
-    int l = 0;
-    int freq[3] = {0, 0, 0};  // for 'a', 'b', 'c'
 
-    for (int r = 0; r < n; r++) {
-        freq[s[r] - 'a']++;
-
-        while (freq[0] > 0 && freq[1] > 0 && freq[2] > 0) {
-            cnt += (n - r);
-            freq[s[l] - 'a']--;
-            l++;
+    for (int i = 0; i < n; i++) {
+        last[s[i] - 'a'] = i;
+        if (last[0] != -1 && last[1] != -1 && last[2] != -1) {
+            cnt += 1 + min({last[0], last[1], last[2]});
         }
     }
     return cnt;
 }
+
 
 };
