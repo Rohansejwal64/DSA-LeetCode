@@ -1,5 +1,5 @@
 class MyLinkedList {
-private:
+public:
     struct Node {
         int val;
         Node* next;
@@ -9,7 +9,7 @@ private:
     Node* head;
     int size;
 
-public:
+
     MyLinkedList() {
         head = nullptr;
         size = 0;
