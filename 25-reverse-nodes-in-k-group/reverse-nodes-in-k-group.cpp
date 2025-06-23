@@ -11,33 +11,46 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        if(head==NULL){
-            return NULL;
-        }
-        int cnt=1;
-         ListNode *temp=head;
-        while(cnt<k && temp!=NULL){
-            temp=temp->next;
-            cnt++;
-             }
-             if(temp==NULL){
-                return head;
-             }
-        
-        int count =1;
-         ListNode *prv=NULL;
-        ListNode *curr=head;
-        ListNode *nextnode=head;
-        while(nextnode!=NULL && count<=k){
-            nextnode=nextnode->next;
-            curr->next=prv;
-            prv=curr;
-            curr=nextnode;
-            count++;
+    if (!head || k == 1) return head;
 
+    // Dummy node to handle edge cases cleanly
+    ListNode* dummy = new ListNode(0);
+    dummy->next = head;
+
+    ListNode* prevGroupEnd = dummy;
+    ListNode* curr = head;
+
+    while (true) {
+        // Check if there are at least k nodes left
+        ListNode* check = curr;
+        for (int i = 0; i < k; ++i) {
+            if (!check) {
+                
+                return dummy->next;
+            }
+            check = check->next;
         }
-        head->next=reverseKGroup(curr,k);
-        return prv;
-        
+
+        // Reverse k nodes
+        ListNode* prev = NULL;
+        ListNode* tail = curr;
+        for (int i = 0; i < k; ++i) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        // Connect previous group with reversed group
+        prevGroupEnd->next = prev;
+        tail->next = curr;
+
+        // Move prevGroupEnd to the end of the reversed group
+        prevGroupEnd = tail;
     }
+
+    // Should not reach here
+    return dummy->next;
+}
+
 };
