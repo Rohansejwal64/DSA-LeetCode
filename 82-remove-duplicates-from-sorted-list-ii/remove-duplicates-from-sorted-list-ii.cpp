@@ -13,30 +13,30 @@ public:
     ListNode* deleteDuplicates(ListNode* head) {
         if (!head) return nullptr;
 
-        // Step 1: Count occurrences of each value
-        std::unordered_map<int, int> freq;
-        ListNode* temp = head;
-        while (temp) {
-            freq[temp->val]++;
-            temp = temp->next;
-        }
-
-        // Step 2: Dummy node to build the result list
         ListNode* dummy = new ListNode(0);
         ListNode* tail = dummy;
-        temp = head;
 
-        while (temp) {
-            if (freq[temp->val] == 1) {
-                // Keep the node (create a new one)
-                tail->next = new ListNode(temp->val);
+        ListNode* curr = head;
+        while (curr) {
+            int count = 0;
+            ListNode* checker = head;
+
+            // Count occurrences of curr->val in the whole list
+            while (checker) {
+                if (checker->val == curr->val) {
+                    count++;
+                }
+                checker = checker->next;
+            }
+
+            // If value is unique, add to result
+            if (count == 1) {
+                tail->next = new ListNode(curr->val);
                 tail = tail->next;
             }
-            temp = temp->next;
-        }
 
-        // Optional: Clean up original list memory (if needed)
-        // ...
+            curr = curr->next;
+        }
 
         return dummy->next;
     }
