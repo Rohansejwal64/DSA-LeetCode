@@ -10,34 +10,29 @@
  */
 class Solution {
 public:
-   ListNode* deleteMiddle(ListNode* head) {
-    if (head == NULL || head->next == NULL) {
-        // Don't delete here; let the caller/test system handle it
-        return NULL;
-    }
+  ListNode* deleteMiddle(ListNode* head) {
+    if (head == NULL || head->next == NULL)
+        return NULL;  // Only one node, return NULL
 
-    int len = 0;
-    ListNode* temp = head;
-    while (temp != NULL) {
-        len++;
-        temp = temp->next;
-    }
-
-    int pos = len / 2;
-
+    ListNode* slow = head;
+    ListNode* fast = head;
     ListNode* prev = NULL;
-    ListNode* curr = head;
-    for (int i = 0; i < pos; i++) {
-        prev = curr;
-        curr = curr->next;
+
+    // Move fast by 2 steps and slow by 1 step
+    while (fast != NULL && fast->next != NULL) {
+        prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
     }
 
-    prev->next = curr->next;
+    // Delete the middle node
+    prev->next = slow->next;
 
-    // Optional: only if you manage memory manually
-    // delete curr;
+    // Optional: delete slow if managing memory manually
+    // delete slow;
 
     return head;
 }
+
 
 };
