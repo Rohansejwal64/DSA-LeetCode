@@ -1,23 +1,26 @@
 class Solution {
 public:
     vector<int> findKDistantIndices(vector<int>& nums, int key, int k) {
-    vector<int> keyIndices;
-    for (int i = 0; i < nums.size(); ++i) {
+    int n = nums.size();
+    vector<bool> mark(n, false);
+
+    for (int i = 0; i < n; ++i) {
         if (nums[i] == key) {
-            keyIndices.push_back(i);
+            int start = max(0, i - k);
+            int end = min(n - 1, i + k);
+            for (int j = start; j <= end; ++j) {
+                mark[j] = true;
+            }
         }
     }
 
-    set<int> resultSet;
-    for (int index : keyIndices) {
-        int start = max(0, index - k);
-        int end = min((int)nums.size() - 1, index + k);
-        for (int i = start; i <= end; ++i) {
-            resultSet.insert(i);
-        }
+    vector<int> ans;
+    for (int i = 0; i < n; ++i) {
+        if (mark[i]) ans.push_back(i);
     }
 
-    return vector<int>(resultSet.begin(), resultSet.end());
+    return ans;
 }
+
 
 };
