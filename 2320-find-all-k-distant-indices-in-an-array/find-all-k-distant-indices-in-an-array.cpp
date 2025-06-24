@@ -1,26 +1,24 @@
 class Solution {
 public:
     vector<int> findKDistantIndices(vector<int>& nums, int key, int k) {
+    vector<int> ans;
     int n = nums.size();
-    vector<bool> mark(n, false);
+    int lastInserted = -1;
 
     for (int i = 0; i < n; ++i) {
         if (nums[i] == key) {
-            int start = max(0, i - k);
+            int start = max(i - k, lastInserted + 1);
             int end = min(n - 1, i + k);
             for (int j = start; j <= end; ++j) {
-                mark[j] = true;
+                ans.push_back(j);
             }
+            lastInserted = end;
         }
-    }
-
-    vector<int> ans;
-    for (int i = 0; i < n; ++i) {
-        if (mark[i]) ans.push_back(i);
     }
 
     return ans;
 }
+
 
 
 };
