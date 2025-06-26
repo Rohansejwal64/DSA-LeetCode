@@ -13,31 +13,28 @@ public:
 ListNode* rotateRight(ListNode* head, int k) {
     if (!head || !head->next || k == 0) return head;
 
-    int len = 0;
-    ListNode* temp = head;
-    while (temp) {
+    int len = 1;
+    ListNode* tail = head;
+    while (tail->next) {
         len++;
-        temp = temp->next;
+        tail = tail->next;
     }
 
     k = k % len;
-    for (int i = 0; i < k; i++) {
-        ListNode* prev = NULL;
-        ListNode* curr = head;
-        
-        // Traverse to the last node
-        while (curr->next) {
-            prev = curr;
-            curr = curr->next;
-        }
-
-        // Move last node to front
-        prev->next = NULL;
-        curr->next = head;
-        head = curr;
+    if(k==0) return head;
+    tail->next=head;
+    int pos=len-k;
+    ListNode* newtail=head;
+    int c=1;
+    while(c<pos){
+        newtail=newtail->next;
+        c++;
     }
-
+    head=newtail->next;
+    newtail->next=NULL;
     return head;
+
+    
 }
 
 };
