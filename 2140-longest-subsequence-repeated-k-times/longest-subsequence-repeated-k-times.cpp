@@ -2,7 +2,8 @@ class Solution {
 public:
     bool is_subsequence(const string& sub, const string& s, int k) {
         string target = "";
-        for (int i = 0; i < k; ++i) target += sub;
+        for (int i = 0; i < k; ++i)
+            target += sub;
 
         int j = 0;
         for (char c : s) {
@@ -15,7 +16,8 @@ public:
 
     string longestSubsequenceRepeatedK(string s, int k) {
         unordered_map<char, int> counts;
-        for (char c : s) counts[c]++;
+        for (char c : s)
+            counts[c]++;
 
         vector<char> hot_chars;
         for (auto& [ch, count] : counts) {
@@ -24,7 +26,8 @@ public:
         }
 
         // Sort in reverse lexicographical order
-        sort(hot_chars.rbegin(), hot_chars.rend());
+        // sort(hot_chars.rbegin(), hot_chars.rend()); no need bfs handles it ,
+        // see if condition.
 
         string ans = "";
         queue<string> q;
@@ -37,13 +40,13 @@ public:
             for (char ch : hot_chars) {
                 string nxt = curr + ch;
                 if (is_subsequence(nxt, s, k)) {
-                    if (nxt.size() > ans.size() || (nxt.size() == ans.size() && nxt > ans))
+                    if (nxt.size() > ans.size() ||
+                        (nxt.size() == ans.size() && nxt > ans))
                         ans = nxt;
-                        if(ans.size()==7) return ans;
                     q.push(nxt);
                 }
             }
         }
-        return ans; 
+        return ans;
     }
 };
