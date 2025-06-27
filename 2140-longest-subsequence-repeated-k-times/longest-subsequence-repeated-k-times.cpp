@@ -24,7 +24,7 @@ public:
         }
 
         // Sort in reverse lexicographical order
-        sort(hot_chars.rbegin(), hot_chars.rend());
+        //sort(hot_chars.rbegin(), hot_chars.rend());
 
         string ans = "";
         queue<string> q;
