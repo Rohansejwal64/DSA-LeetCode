@@ -25,10 +25,6 @@ public:
                 hot_chars.push_back(ch);
         }
 
-        // Sort in reverse lexicographical order
-        // sort(hot_chars.rbegin(), hot_chars.rend()); no need bfs handles it ,
-        // see if condition.
-
         string ans = "";
         queue<string> q;
         q.push("");
