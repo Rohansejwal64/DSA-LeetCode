@@ -5,11 +5,10 @@ public:
         for (int i = 0; i < k; ++i)
             target += sub;
 
-        int j = 0;
-        for (char c : s) {
-            if (j < target.size() && c == target[j]) {
-                ++j;
-            }
+        int i=0,j = 0;
+        while(i<s.size()){
+            if(s[i]==target[j]) j++;
+            i++;
         }
         return j == target.size();
     }
