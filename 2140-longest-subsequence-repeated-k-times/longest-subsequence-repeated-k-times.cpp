@@ -24,7 +24,7 @@ public:
         }
 
         // Sort in reverse lexicographical order
-        //sort(hot_chars.rbegin(), hot_chars.rend());
+        sort(hot_chars.rbegin(), hot_chars.rend());
 
         string ans = "";
         queue<string> q;
@@ -39,6 +39,7 @@ public:
                 if (is_subsequence(nxt, s, k)) {
                     if (nxt.size() > ans.size() || (nxt.size() == ans.size() && nxt > ans))
                         ans = nxt;
+                        if(ans.size()==7) return ans;
                     q.push(nxt);
                 }
             }
