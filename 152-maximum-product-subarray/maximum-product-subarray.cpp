@@ -1,27 +1,16 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        int n = nums.size();
-        int maxProd = nums[0];
-        int prod = 1;
+         int n = nums.size();
+    int maxProd = nums[0];
+    int leftProd = 1, rightProd = 1;
 
-        // Forward pass
-        for (int i = 0; i < n; ++i) {
-            prod *= nums[i];
-            maxProd = max(maxProd, prod);
-            if (prod == 0)
-                prod = 1;
-        }
+    for (int i = 0; i < n; ++i) {
+        leftProd = (leftProd == 0 ? 1 : leftProd) * nums[i];
+        rightProd = (rightProd == 0 ? 1 : rightProd) * nums[n - 1 - i];
+        maxProd = max({maxProd, leftProd, rightProd});
+    }
 
-        // Backward pass
-        prod = 1;
-        for (int i = n - 1; i >= 0; --i) {
-            prod *= nums[i];
-            maxProd = max(maxProd, prod);
-            if (prod == 0)
-                prod = 1;
-        }
-
-        return maxProd;
+    return maxProd;
     }
 };
