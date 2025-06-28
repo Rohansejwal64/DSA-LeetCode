@@ -1,24 +1,32 @@
+ bool compareByIndex(pair<int, int> a, pair<int, int> b) {
+    return a.second < b.second;  // sort by original index
+}
 class Solution {
 public:
-    vector<int> maxSubsequence(vector<int>& nums, int k) {
-        vector<int> v=nums;
+   
 
-        sort(v.begin(),v.end(),greater<int>());
-        unordered_map<int,int> visited;
-        for(int i=0;i<k;i++){
-            visited[v[i]]++;
-        }
-        vector<int> ans;
-        for(int i=0;i<nums.size();i++){
-            if(visited[nums[i]]>0){
-                ans.push_back(nums[i]);
-                visited[nums[i]]--;
-                if(ans.size()==k) break;
-            }
-        }
-        return ans;
-
-
-        
+vector<int> maxSubsequence(vector<int>& nums, int k) {
+    vector<pair<int, int>> v;
+    for (int i = 0; i < nums.size(); i++) {
+        v.push_back({nums[i], i});  // pair of (value, index)
     }
+
+    // Step 1: Sort by value descending
+    sort(v.begin(), v.end(), [](pair<int, int>& a, pair<int, int>& b) {
+        return a.first > b.first;
+    });
+
+    // Step 2: Pick top k and sort by original index
+    vector<pair<int, int>> topK(v.begin(), v.begin() + k);
+    sort(topK.begin(), topK.end(), compareByIndex);
+
+    // Step 3: Extract values
+    vector<int> ans;
+    for (auto& p : topK) {
+        ans.push_back(p.first);
+    }
+
+    return ans;
+}
+
 };
