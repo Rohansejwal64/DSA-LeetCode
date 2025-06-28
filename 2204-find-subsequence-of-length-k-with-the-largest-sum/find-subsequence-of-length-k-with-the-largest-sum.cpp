@@ -18,6 +18,7 @@ public:
                 ans.push_back(nums[i]);
                 cnt--;
             }
+            if(ans.size()==k) break;
         }
         return ans;
     }
