@@ -12,9 +12,10 @@ vector<int> maxSubsequence(vector<int>& nums, int k) {
     }
 
     // Step 1: Sort by value descending
-    sort(v.begin(), v.end(), [](pair<int, int>& a, pair<int, int>& b) {
-        return a.first > b.first;
-    });
+   nth_element(v.begin(), v.begin() + k - 1, v.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+    return a.first > b.first;  // max-heap behavior on `.first`
+});
+
 
     // Step 2: Pick top k and sort by original index
     vector<pair<int, int>> topK(v.begin(), v.begin() + k);
