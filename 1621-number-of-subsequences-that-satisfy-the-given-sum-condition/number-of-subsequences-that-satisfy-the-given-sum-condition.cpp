@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int mod=1000000007;
+    int mod=1e9+7;
     int numSubseq(vector<int>& nums, int target) 
     {
         sort(nums.begin(),nums.end());
