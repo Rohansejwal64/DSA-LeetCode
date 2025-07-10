@@ -11,19 +11,30 @@
  */
 class Solution {
 public:
-bool solve(TreeNode* p,TreeNode* q){
-    if(!p && !q) return true;
-    if((!p && q) || (p && !q)) return false;
+bool isSymmetric(TreeNode* root) {
+    if (!root) return true;
     
-
-
-    if(p->val !=q->val) return false;
-    return solve(p->left, q->right) && solve(p->right, q->left);
-}
-    bool isSymmetric(TreeNode* root) {
-        if(root==NULL) return true;
-        if(root && root->left==NULL && root->right==NULL) return true;
-        return solve(root->left,root->right);
+    queue<TreeNode*> q;
+    q.push(root->left);
+    q.push(root->right);
+    
+    while (!q.empty()) {
+        TreeNode* leftNode = q.front(); q.pop();
+        TreeNode* rightNode = q.front(); q.pop();
         
+        if (!leftNode && !rightNode) continue;
+        if (!leftNode || !rightNode) return false;
+        if (leftNode->val != rightNode->val) return false;
+        
+        // Push mirror children in order
+        q.push(leftNode->left);
+        q.push(rightNode->right);
+        
+        q.push(leftNode->right);
+        q.push(rightNode->left);
     }
+    
+    return true;
+}
+
 };
