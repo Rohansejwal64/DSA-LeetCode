@@ -12,8 +12,9 @@
 class Solution {
 public:
  TreeNode* first = nullptr;
-    TreeNode* second = nullptr;
-    TreeNode* prev = nullptr;
+    TreeNode* middle = nullptr;
+    TreeNode* last = nullptr;
+    TreeNode* prev=NULL;
 
     void inorder(TreeNode* root) {
         if (!root) return;
@@ -21,8 +22,14 @@ public:
         inorder(root->left);
 
         if (prev && prev->val > root->val) {
-            if (!first) first = prev;
-            second = root;
+            if(!first){
+                first=prev;
+                middle=root;
+            }
+            else{
+                last=root;
+            }
+            
         }
         prev = root;
 
@@ -30,8 +37,11 @@ public:
     }
     void recoverTree(TreeNode* root) {
          inorder(root);
-        if (first && second) {
-            swap(first->val, second->val);
+        if(!last){
+            swap(first->val,middle->val);
+        }
+        else{
+            swap(first->val,last->val);
         }
     }
         
