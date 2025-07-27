@@ -5,23 +5,24 @@ public:
         ans.push_back(temp);
         return;
     }
-    if (target < 0) return;
-
-
 
     for (int i = start; i < candidates.size(); i++) {
+        if (i > start && candidates[i] == candidates[i - 1]) continue; // skip duplicates
+
+        if (candidates[i] > target) break; // pruning (because array is sorted)
+
         temp.push_back(candidates[i]);
-        
-        backtrack(candidates, target - candidates[i], i+1, temp, ans); // allow reuse
+        backtrack(candidates, target - candidates[i], i + 1, temp, ans); // move to next index
         temp.pop_back();
-        while(i+1<candidates.size() && candidates[i]==candidates[i+1])i++;
     }
 }
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        vector<vector<int>> ans;
+
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+    sort(candidates.begin(), candidates.end());
+    vector<vector<int>> ans;
     vector<int> temp;
-    sort(candidates.begin(),candidates.end());
     backtrack(candidates, target, 0, temp, ans);
     return ans;
-    }
+}
+
 };
