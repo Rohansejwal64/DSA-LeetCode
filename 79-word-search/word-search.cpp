@@ -21,6 +21,10 @@ public:
     }
 
     bool exist(vector<vector<char>>& board, string word) {
+         vector<int> freq(128, 0), boardFreq(128, 0);
+    for (char c : word) freq[c]++;
+    for (auto& row : board) for (char c : row) boardFreq[c]++;
+    for (char c : word) if (freq[c] > boardFreq[c]) return false;
         int m = board.size(), n = board[0].size();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
