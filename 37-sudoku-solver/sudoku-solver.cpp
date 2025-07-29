@@ -1,6 +1,6 @@
 class Solution {
 public:
-bool isValid(vector<vector<char>>& board, int row, int col, char ch) {
+bool isValid(vector<vector<char>>& board, int &row, int &col, char &ch) {
     for (int i = 0; i < 9; i++) {
         if (board[row][i] == ch) return false;  // row check
         if (board[i][col] == ch) return false;  // col check
