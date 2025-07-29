@@ -1,36 +1,56 @@
 class Solution {
 public:
-    vector<string> result;
+     vector<string> result;
 
-    void helper(string num, int target, int index, long value, long last,
-                string path) {
-        // Base case: if we've used all digits
+    void helper(const string &num, int target, int index, long value, long last, string &path) {
         if (index == num.size()) {
-            if (value == target) {
-                result.push_back(path);
-            }
+            if (value == target) result.push_back(path);
             return;
         }
 
-        long curr = 0; // current number we're building
+        long curr = 0;
+        int pathLen = path.size(); // for backtracking efficiently
+
         for (int i = index; i < num.size(); i++) {
-        curr = curr * 10 + (num[i] - '0');
+            curr = curr * 10 + (num[i] - '0');
 
-        // ✅ Stop if number has leading zeros. 0 khud as a substring chal jayega but 0 as starting of substring nhi chalega  1*0-5 is ok but 1*05 is not ok
-        if (i > index && num[index] == '0') break;
+            // ✅ Stop if number has leading zeros
+            if (i > index && num[index] == '0') break;
 
-        if (index == 0) {
-            helper(num, target, i + 1, curr, curr, path + to_string(curr));
-        } else {
-            helper(num, target, i + 1, value + curr, curr, path + "+" + to_string(curr));
-            helper(num, target, i + 1, value - curr, -curr, path + "-" + to_string(curr));
-            helper(num, target, i + 1, value - last + last * curr, last * curr, path + "*" + to_string(curr));
+            string currStr = to_string(curr);
+
+            if (index == 0) {
+                // First number: no operator before
+                path.append(currStr);
+                helper(num, target, i + 1, curr, curr, path);
+                path.resize(pathLen); // backtrack
+            } else {
+                // Add '+'
+                path.push_back('+');
+                path.append(currStr);
+                helper(num, target, i + 1, value + curr, curr, path);
+                path.resize(pathLen);
+
+                // Add '-'
+                path.push_back('-');
+                path.append(currStr);
+                helper(num, target, i + 1, value - curr, -curr, path);
+                path.resize(pathLen);
+
+                // Add '*'
+                path.push_back('*');
+                path.append(currStr);
+                helper(num, target, i + 1, value - last + last * curr, last * curr, path);
+                path.resize(pathLen);
+            }
         }
-    }
     }
 
     vector<string> addOperators(string num, int target) {
-        helper(num, target, 0, 0, 0, "");
+        result.clear();
+        string path;
+        path.reserve(num.size() * 2); // reserve space for speed
+        helper(num, target, 0, 0, 0, path);
         return result;
     }
 };
