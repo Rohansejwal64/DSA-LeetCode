@@ -16,7 +16,7 @@ public:
         for (int i = index; i < num.size(); i++) {
         curr = curr * 10 + (num[i] - '0');
 
-        // ✅ Stop if number has leading zeros
+        // ✅ Stop if number has leading zeros. 0 khud as a substring chal jayega but 0 as starting of substring nhi chalega  1*0-5 is ok but 1*05 is not ok
         if (i > index && num[index] == '0') break;
 
         if (index == 0) {
