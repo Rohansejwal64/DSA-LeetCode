@@ -20,17 +20,13 @@ public:
             q.pop();
             ans.push_back(u);
             for(int &v:adj[u]){
-                indegree[v]--;
-                if(indegree[v]==0){
-                    q.push(v);
-                }
+                if (--indegree[v] == 0) q.push(v);
             }
 
         }
-        if(ans.size()==numCourses) return ans;
-        else{
-            return {};
-        }
+
+        return ans.size() == numCourses ? ans : vector<int>{};
+        
         
     }
 };
