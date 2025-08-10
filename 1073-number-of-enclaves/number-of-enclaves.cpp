@@ -1,10 +1,10 @@
 class Solution {
 public:
-
+vector<vector<int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
 void dfs(vector<vector<int>>& grid,vector<vector<bool>> &visited,int x, int y){
     visited[x][y]=true;
-    vector<vector<int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    
      for (vector<int>& d : directions) {
             int nx = x + d[0];
             int ny = y + d[1];
