@@ -2,16 +2,16 @@ class Solution {
 public:
 
 
-void dfs(vector<vector<int>>& board,vector<vector<bool>> &visited,int x, int y){
+void dfs(vector<vector<int>>& grid,vector<vector<bool>> &visited,int x, int y){
     visited[x][y]=true;
     vector<vector<int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
      for (vector<int>& d : directions) {
             int nx = x + d[0];
             int ny = y + d[1];
-            if (nx >= 0 && nx < board.size() && ny >= 0 &&
-                ny < board[0].size() && !visited[nx][ny] &&
-                board[nx][ny] == 1) {
-                    dfs(board,visited,nx,ny);
+            if (nx >= 0 && nx < grid.size() && ny >= 0 &&
+                ny < grid[0].size() && !visited[nx][ny] &&
+                grid[nx][ny] == 1) {
+                    dfs(grid,visited,nx,ny);
             }
         }
 
