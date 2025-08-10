@@ -6,6 +6,7 @@ public:
         for(auto &st:wordList){
             s.insert(st);
         }
+         if (s.find(endWord) == s.end()) return 0; // endWord not in list
         int count=0;
         bool find=false;
         queue<pair<string,int>> q;
