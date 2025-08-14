@@ -31,8 +31,7 @@ public:
             int cost = it.second.second;
 
             // We stop the process as soon as the limit for the stops reaches.
-            if (stops > k)
-                continue;
+           
             for (auto iter : adj[node])
             {
                 int adjNode = iter.first;
