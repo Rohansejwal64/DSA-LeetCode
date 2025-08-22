@@ -3,7 +3,8 @@ public:
 long long solve(vector<int>& piles, int mid) {
     long long th = 0;
     for(int i = 0; i < piles.size(); i++) {
-        th += (piles[i] + mid - 1) / mid; // ceil division
+       th+=piles[i]/mid;
+        if(piles[i]%mid !=0) th++;
     }
     return th;
 }
