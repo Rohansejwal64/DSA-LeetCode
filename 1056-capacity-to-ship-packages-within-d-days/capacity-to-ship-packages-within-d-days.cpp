@@ -6,7 +6,7 @@ int solve(vector<int>& arr, int mid){
     int days=0;
     int i=0;
     while(i<arr.size()){
-        if(arr[i]>mid) return INT_MAX;
+        
         if(arr[i]<=capa){
             count++;
             capa-=arr[i++];
@@ -32,7 +32,7 @@ int solve(vector<int>& arr, int mid){
             maxi+=arr[i];
 
         }
-        int s=1;
+        int s= *max_element(arr.begin(),arr.end());
         long long int e=maxi;
         int ans=-1;
         while(s<=e){
