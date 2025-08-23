@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool check(vector<int>& arr, int m, int k, int mid) {
+    bool check(vector<int>& arr, int &m, int &k, int &mid) {
         int flowers = 0;
         int bouquets = 0;
 
