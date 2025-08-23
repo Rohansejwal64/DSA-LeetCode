@@ -17,14 +17,14 @@ int solve(vector<int>& arr, int mid) {
     int shipWithinDays(vector<int>& arr, int days) {
         int n=arr.size();
         long long int ts=0;
-        int maxi=INT_MIN;
+        int s=INT_MIN;
         for(int i=0;i<n;i++){
             ts+=arr[i];
-            maxi=max(maxi,arr[i]);
+            s=max(s,arr[i]);
 
 
         }
-        int s= maxi;
+        
         long long int e=ts;
         int ans=-1;
         while(s<=e){
