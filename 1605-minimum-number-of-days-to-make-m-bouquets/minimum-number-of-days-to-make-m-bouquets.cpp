@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool check(vector<int>& arr, int &m, int &k, int &mid) {
+    bool check(vector<int>& arr, int m, int k, int mid) {
         int flowers = 0;
         int bouquets = 0;
 
@@ -19,6 +19,7 @@ public:
         return bouquets >= m;
     }
     int minDays(vector<int>& arr, int m, int k) {
+        if(arr.size()< (long long)m *(long long)k) return -1;
         int maxi = INT_MIN;
         for (int i = 0; i < arr.size(); i++) {
             maxi = max(maxi, arr[i]);
