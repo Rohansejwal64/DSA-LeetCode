@@ -5,7 +5,7 @@ int solve(vector<int>& arr, int mid) {
     int curr = 0;
 
     for(int i=0; i<arr.size(); i++) {
-        if(arr[i] > mid) return INT_MAX; // can't fit this package
+       // if(arr[i] > mid) return INT_MAX; // can't fit this package
         if(curr + arr[i] > mid) {
             days++;
             curr = 0;
