@@ -1,18 +1,20 @@
 class Solution {
 public:
 int solve(vector<int>& arr, int mid) {
-    int days = 0;   // at least one day is needed
+    int days = 1;   
     int curr = 0;
 
     for(int i=0; i<arr.size(); i++) {
        // if(arr[i] > mid) return INT_MAX; // can't fit this package
         if(curr + arr[i] > mid) {
             days++;
-            curr = 0;
+            curr = arr[i];
         }
-        curr += arr[i];
+        else{
+            curr+=arr[i];
+        }
     }
-    return days+1;
+    return days;
 }
     int shipWithinDays(vector<int>& arr, int days) {
         int n=arr.size();
