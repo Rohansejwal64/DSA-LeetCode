@@ -6,11 +6,12 @@ public:
         int ans=-1;
         while(s<=e){
             long long int mid=s+(e-s)/2;
-            if(mid*mid==x) return mid;
-            if(mid*mid<x){
+            long long value=mid*mid;
+            if(value==x) return mid;
+            if(value<x){
                 ans=mid;
                 s=mid+1;
-                
+
             }
             else{
                 e=mid-1;
