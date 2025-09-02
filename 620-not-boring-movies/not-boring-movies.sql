@@ -1,0 +1,5 @@
+SELECT id,movie,description,rating
+FROM CINEMA
+WHERE ID%2=1
+AND DESCRIPTION NOT IN('boring')
+ORDER BY RATING DESC;
