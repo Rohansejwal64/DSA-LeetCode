@@ -23,7 +23,7 @@ public:
         }
     }
 
-    return (int)dp[0][0]; // if return type must be int, cast back
+    return dp[0][0]; // if return type must be int, cast back
 }
 
 };
