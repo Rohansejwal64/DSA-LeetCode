@@ -11,22 +11,27 @@ int solve(int m,int n,vector<vector<int>> &dp,vector<vector<int>> &grid){
     int minPathSum(vector<vector<int>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
-        vector<vector<int>> dp(m,vector<int>(n,-1));
-        dp[0][0]=grid[0][0];
+       vector<int> temp(n,INT_MAX);
+       
         for(int i=0;i<m;i++){
+            vector<int> curr(n,INT_MAX);
             for(int j=0;j<n;j++){
-                if(i==0 && j==0) continue;
+                if(i==0 && j==0) {
+                    curr[0]=grid[0][0];
+                    continue;
+                }
                 int up=INT_MAX,left=INT_MAX;
                 if(i>0){
-                    up=dp[i-1][j];
+                    up=temp[j];
                 }
                 if(j>0){
-                    left=dp[i][j-1];
+                    left=curr[j-1];
                 }
-                dp[i][j]=min(up,left)+grid[i][j];
+               curr[j]=min(up,left)+grid[i][j];
             }
+            temp=curr;
         }
-        return dp[m-1][n-1];
+        return temp[n-1];
         
     }
 };
