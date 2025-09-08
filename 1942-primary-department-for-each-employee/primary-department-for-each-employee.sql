@@ -1,10 +1,15 @@
-SELECT employee_id, department_id
-FROM employee
-WHERE primary_flag = 'Y'
-   OR employee_id IN (
-       SELECT employee_id
-       FROM employee
-       GROUP BY employee_id
-       HAVING COUNT(department_id) = 1
-   );
-
+SELECT t.employee_id, t.department_id
+FROM (
+    SELECT 
+        e.employee_id,
+        e.department_id,
+        e.primary_flag,
+        COUNT(*) OVER (PARTITION BY e.employee_id) AS cnt,
+        CASE
+            WHEN COUNT(*) OVER (PARTITION BY e.employee_id) = 1 THEN 1
+            WHEN COUNT(*) OVER (PARTITION BY e.employee_id) > 1 AND e.primary_flag = 'Y' THEN 1
+            ELSE 0
+        END AS chk
+    FROM employee e
+) AS t
+WHERE t.chk = 1;
