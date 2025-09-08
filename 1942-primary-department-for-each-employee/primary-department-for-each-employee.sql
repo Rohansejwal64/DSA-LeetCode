@@ -1,15 +1,7 @@
 SELECT t.employee_id, t.department_id
 FROM (
-    SELECT 
-        e.employee_id,
-        e.department_id,
-        e.primary_flag,
-        COUNT(*) OVER (PARTITION BY e.employee_id) AS cnt,
-        CASE
-            WHEN COUNT(*) OVER (PARTITION BY e.employee_id) = 1 THEN 1
-            WHEN COUNT(*) OVER (PARTITION BY e.employee_id) > 1 AND e.primary_flag = 'Y' THEN 1
-            ELSE 0
-        END AS chk
-    FROM employee e
+    select employee_id ,department_id ,primary_flag  ,count(*) over (partition by employee_id )as cnt 
+from employee
 ) AS t
-WHERE t.chk = 1;
+WHERE t.cnt = 1
+OR t.primary_flag='Y';
