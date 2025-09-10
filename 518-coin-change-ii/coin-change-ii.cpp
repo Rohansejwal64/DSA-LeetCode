@@ -1,31 +1,26 @@
 class Solution {
 public:
-int solve(int index, int amount, vector<int>& coins, vector<vector<int>>& dp) {
-    if (amount == 0) return 1; // One valid way (by not taking any coins)
+    int solve(int t, vector<int>& arr,vector<vector<int>> &dp,int i){
+        if(t==0) return 1;
+        if(i==0){
+            if(t%arr[0]==0) return 1;
+            else{
+                return 0;
+            }
+        }
+        if(dp[i][t]!=-1) return dp[i][t];
 
-    if (index == 0) {
-        // Only possible if amount is a multiple of coins[0]
-        return (amount % coins[0] == 0) ? 1 : 0;
+        int np=solve(t,arr,dp,i-1);
+        int p=0;
+        if(arr[i]<=t){
+            p=solve(t-arr[i],arr,dp,i);
+        }
+        return dp[i][t]=np+p;
     }
-
-    if (dp[index][amount] != -1) return dp[index][amount];
-
-    // Not taking the current coin
-    int notTake = solve(index - 1, amount, coins, dp);
-
-    // Taking the current coin (if possible)
-    int take = 0;
-    if (coins[index] <= amount) {
-        take = solve(index, amount - coins[index], coins, dp);
+    int change(int t, vector<int>& arr) {
+        int n= arr.size();
+        vector<vector<int>> dp(n,vector<int>(t+1,-1));
+        return solve(t,arr,dp,n-1);
+        
     }
-
-    return dp[index][amount] = take + notTake;
-}
-
-int change(int amount, vector<int>& coins) {
-    int n = coins.size();
-    vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
-    return solve(n - 1, amount, coins, dp);
-}
-
 };
