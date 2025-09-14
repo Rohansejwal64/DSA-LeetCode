@@ -23,7 +23,7 @@ public:
 
 
         for(int i=n-1;i>=0;i--){
-            for(int j=n-1;j>=-1;j--){
+            for(int j=i-1;j>=-1;j--){
 
                 int p=0;
         int np=0;
