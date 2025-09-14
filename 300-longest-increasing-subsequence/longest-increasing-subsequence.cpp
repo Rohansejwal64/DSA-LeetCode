@@ -23,20 +23,20 @@ public:
 
 
         for(int i=n-1;i>=0;i--){
-            for(int j=n;j>=0;j--){
+            for(int j=n-1;j>=-1;j--){
 
-                 int p=0;
+                int p=0;
         int np=0;
 
-         if(j==0 || nums[i]>nums[j-1]){
-            p=1+ dp[i+1][i+1]  ;
-            np=0+ dp[i+1][j] ;
+        if(j==-1 || nums[i]>nums[j]){
+            p=1+dp[i+1][i+1];
+            np=0+ dp[i+1][j+1] ;
 
         }
         else{
-            np=0+ dp[i+1][j];
+             np=0+ dp[i+1][j+1] ;
         }
-         dp[i][j]=max(p,np);
+         dp[i][j+1]=max(p,np);
 
             }
         }
