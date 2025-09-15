@@ -19,7 +19,10 @@ static bool comp(string &s1,string &s2){
     return s1.size()<s2.size();
 }
     int longestStrChain(vector<string>& words) {
-         sort(words.begin(),words.end(),comp);
+         sort(words.begin(),words.end(),[](string &s1,string &s2){
+            return s1.size()<s2.size();
+
+         });
         int n=words.size();
          vector<int> dp(n, 1);
 
