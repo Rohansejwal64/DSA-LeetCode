@@ -10,7 +10,7 @@ public:
 
        vector<vector<int>> bucket(nums.size()+1);
 
-       for( auto temp : freq){
+       for( auto &temp : freq){
         int ele= temp.first;
         int f=temp.second;
         bucket[f].push_back(ele);
