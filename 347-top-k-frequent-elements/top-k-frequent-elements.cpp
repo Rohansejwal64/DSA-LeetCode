@@ -8,26 +8,25 @@ public:
             freq[x]++;
         }
 
-       vector<vector<int>> bucket(nums.size()+1);
+        // Step 2: Bucket sort by frequency
+        vector<vector<int>> bucket(nums.size()+1);
 
-       for( auto &temp : freq){
-        int ele= temp.first;
-        int f=temp.second;
-        bucket[f].push_back(ele);
-       }
-       vector<int> ans;
-
-       for(int i=nums.size();i>=0;i--){
-        if(bucket[i].size()==0) continue;
-        while(bucket[i].size()>0 && k>0){
-            ans.push_back(bucket[i].back());
-            bucket[i].pop_back();
-            k--;
+        for(auto &temp : freq){
+            int ele = temp.first;
+            int f   = temp.second;
+            bucket[f].push_back(ele);
         }
-       }
-       return ans;
 
+        // Step 3: Collect top k from highest frequency bucket
+        vector<int> ans;
+        for(int i = nums.size(); i >= 0 && k > 0; i--){
+            for(int ele : bucket[i]){
+                ans.push_back(ele);
+                k--;
+                if(k == 0) break;
+            }
+        }
 
-        
+        return ans;
     }
 };
