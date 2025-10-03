@@ -57,9 +57,7 @@ public:
             // evict LFU key
             int evictKey = freqList[minFreq].back(); // least recent
             freqList[minFreq].pop_back();
-            if (freqList[minFreq].empty()) {
-                freqList.erase(minFreq);
-            }
+            
             delete keyNode[evictKey];
             keyNode.erase(evictKey);
         }
